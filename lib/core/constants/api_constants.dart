@@ -6,4 +6,5 @@ class ApiConstants{
   static const String coursesRoute = '/courses';
   static const String reserveRoute = '/reserve';
   static const String paymentRoute = '/payment-webhook';
+  static const String classesFromCourses = '/courses/{course_id}/classes';
 }

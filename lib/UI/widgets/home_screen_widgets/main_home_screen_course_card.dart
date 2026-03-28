@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:learnex/UI/classes_screen/classes_view.dart';
 
 class MainHomeScreenCourseCard extends StatefulWidget {
   final String title;
   final String description;
   final IconData icon;
+  final VoidCallback onTap;
 
   const MainHomeScreenCourseCard({
     super.key,
     required this.title,
     required this.description,
     required this.icon,
+    required this.onTap,
   });
 
   @override
@@ -18,7 +19,6 @@ class MainHomeScreenCourseCard extends StatefulWidget {
 }
 
 class _CourseCardState extends State<MainHomeScreenCourseCard> {
-
   bool hover = false;
 
   @override
@@ -44,17 +44,12 @@ class _CourseCardState extends State<MainHomeScreenCourseCard> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
-            /// Icon
             Icon(
               widget.icon,
               size: 40,
               color: Colors.blue,
             ),
-
             const SizedBox(height: 20),
-
-            /// Title
             Text(
               widget.title,
               style: const TextStyle(
@@ -62,10 +57,7 @@ class _CourseCardState extends State<MainHomeScreenCourseCard> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-
             const SizedBox(height: 10),
-
-            /// Description
             Text(
               widget.description,
               style: const TextStyle(
@@ -73,21 +65,15 @@ class _CourseCardState extends State<MainHomeScreenCourseCard> {
                 height: 1.5,
               ),
             ),
-
             const SizedBox(height: 25),
-
-            /// Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                padding:
-                const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 14),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ClassesView(),));
-              },
+              onPressed: widget.onTap,
               child: const Text("View Classes"),
             )
           ],

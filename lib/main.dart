@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:learnex/UI/home/home_screen.dart';
+import 'package:learnex/UI/home/home_view.dart';
 
 import 'package:learnex/core/routes/app_router.dart';
 

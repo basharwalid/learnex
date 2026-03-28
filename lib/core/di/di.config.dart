@@ -20,7 +20,9 @@ import '../../data/repo/repository_implementation.dart' as _i958;
 import '../../domain/data_source/online_remote_data_source.dart' as _i602;
 import '../../domain/repo/Repository.dart' as _i223;
 import '../../domain/use_case/get_all_classes_use_case.dart' as _i690;
+import '../../domain/use_case/get_all_courses_use_case.dart' as _i701;
 import '../../UI/classes_screen/classes_view_model.dart' as _i291;
+import '../../UI/home/home_view_model.dart' as _i285;
 import 'register_module.dart' as _i291;
 
 extension GetItInjectableX on _i174.GetIt {
@@ -32,9 +34,11 @@ extension GetItInjectableX on _i174.GetIt {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     final registerModule = _$RegisterModule();
     gh.singleton<_i361.Dio>(() => registerModule.dio);
-    gh.singleton<_i681.ApiClient>(() => _i681.ApiClient(gh<_i361.Dio>()));
-    gh.factory<_i602.OnlineRemoteDataSource>(
-      () => _i525.OnlineRemoteDataSourceImplementation(gh<_i681.ApiClient>()),
+    gh.singleton<_i681.ApiClient>(
+      () => registerModule.apiClient(gh<_i361.Dio>()),
+    );
+    gh.lazySingleton<_i602.OnlineRemoteDataSource>(
+      () => _i525.OnlineRemoteDataSourceImpl(gh<_i681.ApiClient>()),
     );
     gh.factory<_i223.Repository>(
       () => _i958.RepositoryImplementation(gh<_i602.OnlineRemoteDataSource>()),
@@ -42,8 +46,14 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i690.GetAllClassesUseCase>(
       () => _i690.GetAllClassesUseCase(gh<_i223.Repository>()),
     );
-    gh.factory<_i291.CourseViewModel>(
-      () => _i291.CourseViewModel(gh<_i690.GetAllClassesUseCase>()),
+    gh.factory<_i701.GetAllCoursesUseCase>(
+      () => _i701.GetAllCoursesUseCase(gh<_i223.Repository>()),
+    );
+    gh.factory<_i291.ClassesViewModel>(
+      () => _i291.ClassesViewModel(gh<_i690.GetAllClassesUseCase>()),
+    );
+    gh.factory<_i285.HomeViewModel>(
+      () => _i285.HomeViewModel(gh<_i701.GetAllCoursesUseCase>()),
     );
     return this;
   }

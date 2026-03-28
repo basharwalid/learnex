@@ -4,23 +4,28 @@ import 'package:learnex/UI/widgets/classes/classes_card.dart';
 import 'package:learnex/core/di/di.dart';
 
 class ClassesView extends StatefulWidget {
-  static const String routeName = '/course';
+  static const String routeName = '/classes';
 
-  const ClassesView({super.key});
+  final int courseId;
+  final String courseName;
+
+  const ClassesView({
+    super.key,
+    required this.courseId,
+    required this.courseName,
+  });
 
   @override
   State<ClassesView> createState() => _ClassesViewState();
 }
 
 class _ClassesViewState extends State<ClassesView> {
-  // Pull the ViewModel from GetIt
-  final CourseViewModel viewModel = getIt<CourseViewModel>();
+  final ClassesViewModel viewModel = getIt<ClassesViewModel>();
 
   @override
   void initState() {
     super.initState();
-    // Trigger the data fetch
-    viewModel.loadClasses();
+    viewModel.loadClasses(widget.courseId);
   }
 
   @override
@@ -30,14 +35,13 @@ class _ClassesViewState extends State<ClassesView> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 40),
         child: ListenableBuilder(
-          // Listens to changes in the ViewModel
           listenable: viewModel,
           builder: (context, _) {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "English Classes",
+                  '${widget.courseName} Classes',
                   style: const TextStyle(
                     fontSize: 34,
                     fontWeight: FontWeight.bold,
@@ -62,9 +66,7 @@ class _ClassesViewState extends State<ClassesView> {
       return Center(child: Text(viewModel.errorMessage!));
     }
 
-    final sessions = viewModel.sessions ?? [];
-
-    if (sessions.isEmpty) {
+    if (viewModel.classes.isEmpty) {
       return const Center(child: Text("No classes available."));
     }
 
@@ -75,8 +77,8 @@ class _ClassesViewState extends State<ClassesView> {
         crossAxisSpacing: 25,
         childAspectRatio: 1.4,
       ),
-      itemCount: sessions.length,
-      itemBuilder: (context, index) => ClassCard(session: sessions[index]),
+      itemCount: viewModel.classes.length,
+      itemBuilder: (context, index) => ClassCard(session: viewModel.classes[index]),
     );
   }
 }

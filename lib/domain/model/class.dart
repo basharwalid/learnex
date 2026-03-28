@@ -1,37 +1,23 @@
-class Classes {
-  final int id;
-  final String date;
-  final int duration;
-  final int availableSeats;
-  final int totalSeats;
+class Class {
+  final int? id;
+  final int? courseId;
+  final DateTime? classDate;
+  final String? classTime;
+  final int? price;
+  final int? totalSeats;
+  final int? availableSeats;
+  final String? meetingLink;
+  final String? status;
 
-  Classes({
-    required this.id,
-    required this.date,
-    required this.duration,
-    required this.availableSeats,
-    required this.totalSeats,
+  Class({
+    this.id,
+    this.courseId,
+    this.classDate,
+    this.classTime,
+    this.price,
+    this.totalSeats,
+    this.availableSeats,
+    this.meetingLink,
+    this.status,
   });
-
-  factory Classes.fromJson(Map<String, dynamic> json) {
-    return Classes(
-      id: json['id'],
-      date: json['class_date_time'],
-      duration: json['duration'],
-      availableSeats: json['available_seats'],
-      totalSeats: json['total_seats'],
-    );
-  }
-
-  //Map<String, dynamic> toJson() {}
-
-  // ClassesDto toData() {
-  //   return ClassesDto(
-  //     id: id,
-  //     date: date,
-  //     duration: duration,
-  //     availableSeats: availableSeats,
-  //     totalSeats: totalSeats,
-  //   );
-  // }
 }

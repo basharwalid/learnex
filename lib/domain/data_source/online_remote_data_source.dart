@@ -1,8 +1,9 @@
 import 'package:learnex/core/network/results.dart';
-import 'package:learnex/data/model/classes_response_dto.dart';
+import 'package:learnex/data/model/class_dto.dart';
+
+import 'package:learnex/data/model/course_dto.dart';
 
 abstract class OnlineRemoteDataSource {
-  Future<Results<List<ClassesResponseDto>>> getClasses(
-      String courseName
-  );
+  Future<Results<List<ClassDto>>> getClasses(int courseId);
+  Future<Results<List<CourseDto>>> getCourses();
 }
