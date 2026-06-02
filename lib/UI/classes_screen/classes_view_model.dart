@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:learnex/core/network/results.dart';
 import 'package:learnex/domain/model/class.dart';
+import 'package:learnex/domain/model/course.dart';
 import 'package:learnex/domain/use_case/get_all_classes_use_case.dart';
 
 @injectable

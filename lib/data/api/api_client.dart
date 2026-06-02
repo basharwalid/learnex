@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 import 'package:learnex/core/constants/api_constants.dart';
 import 'package:learnex/data/model/class_dto.dart';
 import 'package:learnex/data/model/course_dto.dart';
+import 'package:learnex/data/model/reserve_response_dto.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'api_client.g.dart';
@@ -17,4 +18,9 @@ abstract class ApiClient {
 
   @GET(ApiConstants.classesFromCourses)
   Future<List<ClassDto>> getClasses(@Path('course_id') int courseId);
+
+  @POST(ApiConstants.reserveRoute)
+  Future<ReserveResponseDto> reserveSeat(@Body() Map<String, dynamic> body);
+
+
 }
